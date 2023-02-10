@@ -9,11 +9,13 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     MEMORY=512
     CPUS=1
     HD_SIZE=10000
+    NETWORK_INTERFACE="enp3s0f2"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     WORK_FOLDER="/Users/mdulcie/goinfre"
     MEMORY=4096
     CPUS=6
     HD_SIZE=20000
+    NETWORK_INTERFACE="enp3s0f2"
 else
     echo Oopps
     exit
@@ -28,7 +30,6 @@ VBoxManage createvm                                     \
                     --name vb_mdulcie                   \
                     --register                          \
                     --basefolder $WORK_FOLDER           
-                    # --basefolder /home/user
 
 # NETWORK=$(VBoxManage hostonlyif create | grep vboxnet[[:digit:]] -E -o)
 # NETWORK_NB=$(echo $NETWORK | grep [[:digit:]] -E -o)
@@ -54,11 +55,6 @@ VBoxManage modifyvm        vb_mdulcie                   \
                     --rtcuseutc on                      \
                     --cpus $CPUS                        \
                     --memory $MEMORY                    \
-                    # --cpus 1                            \
-                    # --memory 1024                       \
-                    # --clipboard   bidirectional         \
-                    # --draganddrop bidirectional         \
-                    # --graphicscontroller vmsvga
 
 ##########
 # Создать диски
@@ -74,8 +70,6 @@ VBoxManage createmedium                                  \
                     --filename $WORK_FOLDER/vb_mdulcie/vb_mdulcie.vhd \
                     --size $HD_SIZE                      \
                     --variant Fixed                      \
-                    # --filename /home/user/vb_mdulcie/vb_mdulcie.vhd \
-                    # --size 10000                         \
                     
 # Присоединить жесткий диск к контроллеру
 echo -e "\033[32m Virtual machine: attach hard disk to controller \033[0m"
@@ -85,7 +79,6 @@ VBoxManage storageattach   vb_mdulcie                   \
                     --device 0                          \
                     --type hdd                          \
                     --medium $WORK_FOLDER/vb_mdulcie/vb_mdulcie.vhd
-                    # --medium /home/user/vb_mdulcie/vb_mdulcie.vhd
 
 # скачать установочный образ системы гостевой машины
 echo -e "\033[32m Virtual machine: download the installation \n                  \
@@ -107,7 +100,8 @@ VBoxManage storageattach   vb_mdulcie                   \
                     --device 0                          \
                     --type dvddrive                     \
                     --medium $WORK_FOLDER/$ISO_IMAGE_NAME
-                    # --medium /home/user/OS_guest.iso
+
+vboxmanage modifyvm vb_mdulcie --nic1 bridged --bridgeadapter1 $NETWORK_INTERFACE
 
 # запустить машину с установочного диска
 echo -e "\033[32m Virtual machine: run with the installation \n                  \
