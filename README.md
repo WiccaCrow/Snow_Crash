@@ -12,23 +12,23 @@ level10 level11 level12 level13 level14
 
 Ниже последовательно описаны мои действия по достижению цели.
 
-# Содержание:
+# Содержание и список полученных паролей
 
-[level00](#lvl00) \
-[level01](#lvl01) \
-[level02](#lvl02) \
-[level03](#lvl03) \
-[level04](#lvl04) \
-[level05](#lvl05) \
-[level06](#lvl06) \
-[level07](#lvl07) \
-[level08](#lvl08) \
-[level09](#lvl09) \
-[level10](#lvl10) \
-[level11](#lvl11) \
-[level12](#lvl12) \
-[level13](#lvl13) \
-[level14](#lvl14) 
+[level00](#lvl00) x24ti5gi3x0ol2eh4esiuxias \
+[level01](#lvl01) f2av5il02puano7naaf6adaaf \
+[level02](#lvl02) kooda2puivaav1idi4f57q8iq \
+[level03](#lvl03) qi0maab88jeaj46qoumi7maus \
+[level04](#lvl04) ne2searoevaevoem4ov4ar8ap \
+[level05](#lvl05) viuaaale9huek52boumoomioc \
+[level06](#lvl06) wiok45aaoguiboiki2tuin6ub \
+[level07](#lvl07) fiumuikeil55xe9cu4dood66h \
+[level08](#lvl08) 25749xKZ8L7DkSCwJkT9dyv6f \
+[level09](#lvl09) s5cAJpM8ev6XHw998pRWG728z \
+[level10](#lvl10) feulo4b72j7edeahuete3no7c \
+[level11](#lvl11) fa6v5ateaw21peobuub8ipe6s \
+[level12](#lvl12) g1qKMiRpXf53AWhDaU7FEkczr \
+[level13](#lvl13) 2A31L79asukciNyi8uppkEuSx \
+[level14](#lvl14) 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ 
 
 
 <a name="lvl00"></a> 
@@ -54,7 +54,7 @@ cat /usr/sbin/john
 # cdiiddwpgswtgt
 
 ```
-3. В файле что-то защифровано. \
+3. В файле что-то зашифровано. \
 john восстановит пароль по хешу.
 Хеш пароля начинается с числа (число+строка). \
 Всё же проверила программой, и конечно же ничего не получила. \
@@ -102,7 +102,7 @@ cat /etc/passwd
 ```
 пользователь:пароль(х или другой символ, /etc/shadow расшифрованные пароли):id пользователя uid: gid id группы: домашняя директория: дефолтный shell
 
-Нахожу зашифрованный пароль flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+Нахожу захешированный пароль flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
 3. Создаю файл с этой строкой и передаю в john
 ```sh
 #------#
@@ -205,6 +205,8 @@ https://networkguru.ru/protokol-transportnogo-urovnia-tcp-chto-nuzhno-znat/ \
 
 tcp[13] & 8 != 0 проверяет, установлен ли этот флаг в 0 или 1
 
+![tcp[13] & 8 != 0](tcp.jpg)
+
 and src 59.233.235.218 фильтрую пакеты по отправителю (отправитель вводит пароль)
 ```sh
 tcpdump -r ~/level02.pcap -n -Xq | nl | grep assword
@@ -250,7 +252,7 @@ getflag
 # ||
 # \/
 # Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
-# перехожу ко 3му уровню
+# перехожу к 3му уровню
 su level03 kooda2puivaav1idi4f57q8iq
 ```
 
@@ -1217,21 +1219,3 @@ getflag
 # \/
 # Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
 ```
-
-# список полученных паролей
-
-[level00](#lvl00) x24ti5gi3x0ol2eh4esiuxias \
-[level01](#lvl01) f2av5il02puano7naaf6adaaf \
-[level02](#lvl02) kooda2puivaav1idi4f57q8iq \
-[level03](#lvl03) qi0maab88jeaj46qoumi7maus \
-[level04](#lvl04) ne2searoevaevoem4ov4ar8ap \
-[level05](#lvl05) viuaaale9huek52boumoomioc \
-[level06](#lvl06) wiok45aaoguiboiki2tuin6ub \
-[level07](#lvl07) fiumuikeil55xe9cu4dood66h \
-[level08](#lvl08) 25749xKZ8L7DkSCwJkT9dyv6f \
-[level09](#lvl09) s5cAJpM8ev6XHw998pRWG728z \
-[level10](#lvl10) feulo4b72j7edeahuete3no7c \
-[level11](#lvl11) fa6v5ateaw21peobuub8ipe6s \
-[level12](#lvl12) g1qKMiRpXf53AWhDaU7FEkczr \
-[level13](#lvl13) 2A31L79asukciNyi8uppkEuSx \
-[level14](#lvl14) 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ 
