@@ -12,27 +12,33 @@ level10 level11 level12 level13 level14
 
 Ниже последовательно описаны мои действия по достижению цели.
 
-# Содержание и список полученных паролей
+<a name="content"></a> 
+# Содержание и список полученных паролей от пользователя level(xx+1)
 
-[level00](#lvl00) x24ti5gi3x0ol2eh4esiuxias \
-[level01](#lvl01) f2av5il02puano7naaf6adaaf \
-[level02](#lvl02) kooda2puivaav1idi4f57q8iq \
-[level03](#lvl03) qi0maab88jeaj46qoumi7maus \
-[level04](#lvl04) ne2searoevaevoem4ov4ar8ap \
-[level05](#lvl05) viuaaale9huek52boumoomioc \
-[level06](#lvl06) wiok45aaoguiboiki2tuin6ub \
-[level07](#lvl07) fiumuikeil55xe9cu4dood66h \
-[level08](#lvl08) 25749xKZ8L7DkSCwJkT9dyv6f \
-[level09](#lvl09) s5cAJpM8ev6XHw998pRWG728z \
-[level10](#lvl10) feulo4b72j7edeahuete3no7c \
-[level11](#lvl11) fa6v5ateaw21peobuub8ipe6s \
-[level12](#lvl12) g1qKMiRpXf53AWhDaU7FEkczr \
-[level13](#lvl13) 2A31L79asukciNyi8uppkEuSx \
-[level14](#lvl14) 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ 
+| Пользователь level(xx) | пароль от level(xx+1)                     |  
+| ---------------------- | -----------------------------------------:|
+| [level00](#lvl00)      | x24ti5gi3x0ol2eh4esiuxias                 |
+| [level01](#lvl01)      | f2av5il02puano7naaf6adaaf                 |
+| [level02](#lvl02)      | kooda2puivaav1idi4f57q8iq                 |
+| [level03](#lvl03)      | qi0maab88jeaj46qoumi7maus                 |
+| [level04](#lvl04)      | ne2searoevaevoem4ov4ar8ap                 |
+| [level05](#lvl05)      | viuaaale9huek52boumoomioc                 |
+| [level06](#lvl06)      | wiok45aaoguiboiki2tuin6ub                 |
+| [level07](#lvl07)      | fiumuikeil55xe9cu4dood66h                 |
+| [level08](#lvl08)      | 25749xKZ8L7DkSCwJkT9dyv6f                 |
+| [level09](#lvl09)      | s5cAJpM8ev6XHw998pRWG728z                 |
+| [level10](#lvl10)      | feulo4b72j7edeahuete3no7c                 |
+| [level11](#lvl11)      | fa6v5ateaw21peobuub8ipe6s                 |
+| [level12](#lvl12)      | g1qKMiRpXf53AWhDaU7FEkczr                 |
+| [level13](#lvl13)      | 2A31L79asukciNyi8uppkEuSx                 |
+| [level14](#lvl14)      | 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ   |
 
-
-<a name="lvl00"></a> 
+  
+#
+###### [вернуться к содержанию](#content)
+<a name="lvl00"></a>  
 # level00
+
 
 1. Проверяю содержимое директории:
 ```
@@ -55,6 +61,7 @@ cat /usr/sbin/john
 
 ```
 3. В файле что-то зашифровано. \
+В названии файла john.         \
 john восстановит пароль по хешу.
 Хеш пароля начинается с числа (число+строка). \
 Всё же проверила программой, и конечно же ничего не получила. \
@@ -80,6 +87,9 @@ getflag
 # перехожу к 01му уровню
 su level01 x24ti5gi3x0ol2eh4esiuxias
 ```
+
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl01"></a> 
 # level01
 
@@ -103,28 +113,52 @@ cat /etc/passwd
 пользователь:пароль(х или другой символ, /etc/shadow расшифрованные пароли):id пользователя uid: gid id группы: домашняя директория: дефолтный shell
 
 Нахожу захешированный пароль flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
-3. Создаю файл с этой строкой и передаю в john
+3. Создаю файл с этой строкой и передаю в john (подсказка в названии файла с level00)
 ```sh
 #------#
 # MacOS
 # https://download.openwall.net/pub/projects/john/contrib/macosx/
 # ||
 # \/
-john-1.8.0.9-jumbo-macosx_avx2.zip
+# john-1.8.0.9-jumbo-macosx_avx2.zip
 
-./john ~/Desktop/snow_crash/lvl01ForJohn
-cat john.pot
+# ./john ~/Desktop/snow_crash/lvl01ForJohn
+# cat john.pot
 # ||
 # \/
 # 42hDRfypTqqnw:abcdefg
 
 # либо 
-./john ~/Desktop/snow_crash/lvl01ForJohn --show
+# ./john ~/Desktop/snow_crash/lvl01ForJohn --show
 # ||
 # \/
 # flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
 
+# можно этим скриптом:
+#!/bin/bash
 
+#!/bin/bash
+
+curl -O https://download.openwall.net/pub/projects/john/contrib/macosx/john-1.8.0.9-jumbo-macosx_avx2.zip
+chmod 777 ./john-1.8.0.9-jumbo-macosx_avx2.zip
+unzip john-1.8.0.9-jumbo-macosx_avx2.zip
+rm -rf ./john-1.8.0.9-jumbo-macosx_avx2.zip
+cd  ~/Desktop/Snow_Crash/Vbox/john-1.8.0.9-jumbo-macosx_avx2/run
+
+./john                                          \
+        ~/Desktop/Snow_Crash/lvl01ForJohn       \
+        # --format=descrypt-opencl                \
+        # --wordlist=/usr/share/john/password.lst \
+        # --show                                  \
+echo
+cat ~/Desktop/Snow_Crash/Vbox/john-1.8.0.9-jumbo-macosx_avx2/run/john.pot
+
+echo
+cd  ~/Desktop/Snow_Crash/Vbox
+rm -rf john-1.8.0.9-jumbo-macosx_avx2
+```
+
+```sh
 #------#
 # Ubuntu
 sudo snap install john-the-ripper
@@ -156,6 +190,9 @@ getflag
 ```
 su level02 f2av5il02puano7naaf6adaaf
 ```
+
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl02"></a> 
 # level02
 
@@ -256,6 +293,8 @@ getflag
 su level03 kooda2puivaav1idi4f57q8iq
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl03"></a> 
 # level03
 1. Проверяю содержимое директории:
@@ -312,6 +351,8 @@ export PATH=/tmp:$PATH
 su level04 qi0maab88jeaj46qoumi7maus
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl04"></a> 
 # level04
 1. Проверяю содержимое директории:
@@ -350,6 +391,8 @@ curl localhost:4747?x='$(getflag)'
 su level05 ne2searoevaevoem4ov4ar8ap
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl05"></a> 
 # level05
 
@@ -390,6 +433,8 @@ cat /opt/openarenaserver/psswflag
 su level06 viuaaale9huek52boumoomioc
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl06"></a> 
 # level06
 
@@ -473,6 +518,8 @@ echo '[x {${system(getflag)}}]' > /tmp/myy
 su level07 wiok45aaoguiboiki2tuin6ub
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl07"></a> 
 # level07
 
@@ -513,6 +560,8 @@ export LOGNAME='$(getflag)'
 su level08 fiumuikeil55xe9cu4dood66h
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl08"></a> 
 # level08
 
@@ -614,6 +663,8 @@ ln -s token /run/shm/tkn
 ./level08 /run/shm/tkn
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl09"></a> 
 # level09
 
@@ -677,6 +728,8 @@ getflag
 su level10 s5cAJpM8ev6XHw998pRWG728z
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl10"></a> 
 # level10
 
@@ -789,6 +842,8 @@ su level11
 Password: feulo4b72j7edeahuete3no7c
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl11"></a> 
 # level11
 
@@ -883,6 +938,8 @@ cat tkn
 su level12 fa6v5ateaw21peobuub8ipe6s
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl12"></a> 
 # level12
 
@@ -1008,6 +1065,8 @@ su level13
 Password: g1qKMiRpXf53AWhDaU7FEkczr
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl13"></a> 
 # level13
 
@@ -1062,8 +1121,8 @@ disas (пробел и таб)
    0x0804859a <+14>:    cmp    $0x1092,%eax - числовая константа в 16м формате (4242 в 10м) \
    условный прыжок после сравнения:                   \
    0x0804859f <+19>:    je     0x80485cb <main+63>    \
-`  ||`                                                  
-`  \/ `                                                 \
+`||`                                                  \
+`\/`                                                  \
   0x080485cb <+63>:    movl   $0x80486ef,(%esp)
 
 ```sh
@@ -1143,6 +1202,8 @@ c
 su level14 2A31L79asukciNyi8uppkEuSx
 ```
 
+#
+###### [вернуться к содержанию](#content)
 <a name="lvl14"></a> 
 # level14
 

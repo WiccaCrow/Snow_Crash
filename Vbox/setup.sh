@@ -3,19 +3,20 @@
 ISO_IMAGE_URL="https://cdn.intra.42.fr/isos/SnowCrash.iso"
 ISO_IMAGE_NAME="OS_guest.iso"
 
+HD_SIZE=10000
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     WORK_FOLDER=$HOME
     mkdir -p $WORK_FOLDER/vb_mdulcie
     MEMORY=512
     CPUS=1
-    HD_SIZE=10000
     NETWORK_INTERFACE="enp3s0f2"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     WORK_FOLDER="/Users/mdulcie/goinfre"
     MEMORY=4096
     CPUS=6
-    HD_SIZE=20000
-    NETWORK_INTERFACE="enp3s0f2"
+    NETWORK_INTERFACE="en0"
+    # HD_SIZE=10000
 else
     echo Oopps
     exit
@@ -30,18 +31,6 @@ VBoxManage createvm                                     \
                     --name vb_mdulcie                   \
                     --register                          \
                     --basefolder $WORK_FOLDER           
-
-# NETWORK=$(VBoxManage hostonlyif create | grep vboxnet[[:digit:]] -E -o)
-# NETWORK_NB=$(echo $NETWORK | grep [[:digit:]] -E -o)
-
-# настроить виртуальную машину
-# if VBoxManage list hostonlyifs | grep vboxnet0; then
-#     NETWORK=vboxnet0
-#     NETWORK_NB=0
-# else
-#     NETWORK=$(VBoxManage hostonlyif create | grep vboxnet[[:digit:]] -E -o)
-#     NETWORK_NB=$(echo $NETWORK | grep [[:digit:]] -E -o)
-# fi
 
 echo -e "\033[32m Virtual machine: setup \033[0m"
 VBoxManage modifyvm        vb_mdulcie                   \
@@ -101,7 +90,29 @@ VBoxManage storageattach   vb_mdulcie                   \
                     --type dvddrive                     \
                     --medium $WORK_FOLDER/$ISO_IMAGE_NAME
 
-vboxmanage modifyvm vb_mdulcie --nic1 bridged --bridgeadapter1 $NETWORK_INTERFACE
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    vboxmanage modifyvm vb_mdulcie --nic1 bridged --bridgeadapter1 $NETWORK_INTERFACE
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # настроить виртуальную машину
+    if VBoxManage list hostonlyifs | grep vboxnet0; then
+        NETWORK=vboxnet0
+        NETWORK_NB=0
+    else
+        NETWORK=$(VBoxManage hostonlyif create | grep 'vboxnet[[:digit:]]' -E -o)
+        NETWORK_NB=$(echo $NETWORK | grep '[[:digit:]]' -E -o)
+    fi
+    VBoxManage modifyvm        vb_mdulcie                   \
+                    --nic1 hostonly                         \
+                    --hostonlyadapter1 $NETWORK             \
+                    --cableconnected1 on
+else
+    echo Oopps
+    exit
+fi
+
+# NETWORK=$(VBoxManage hostonlyif create | grep vboxnet[[:digit:]] -E -o)
+# NETWORK_NB=$(echo $NETWORK | grep [[:digit:]] -E -o)
+
 
 # запустить машину с установочного диска
 echo -e "\033[32m Virtual machine: run with the installation \n                  \
