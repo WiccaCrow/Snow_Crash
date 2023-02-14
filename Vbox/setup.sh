@@ -15,8 +15,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     WORK_FOLDER="/Users/mdulcie/goinfre"
     MEMORY=4096
     CPUS=6
-    NETWORK_INTERFACE="en0"
-    # HD_SIZE=10000
 else
     echo Oopps
     exit
@@ -95,23 +93,29 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # настроить виртуальную машину
     if VBoxManage list hostonlyifs | grep vboxnet0; then
-        NETWORK=vboxnet0
+        NETWORK_INTERFACE=vboxnet0
         NETWORK_NB=0
+        echo
+        echo here 1
+        echo
     else
-        NETWORK=$(VBoxManage hostonlyif create | grep 'vboxnet[[:digit:]]' -E -o)
-        NETWORK_NB=$(echo $NETWORK | grep '[[:digit:]]' -E -o)
+        echo
+        echo here 2
+        echo
+        NETWORK_INTERFACE=$(VBoxManage hostonlyif create | grep 'vboxnet[[:digit:]]' -E -o)
+        NETWORK_NB=$(echo $NETWORK_INTERFACE | grep '[[:digit:]]' -E -o)
     fi
+        echo
+        echo here 3
+        echo
     VBoxManage modifyvm        vb_mdulcie                   \
                     --nic1 hostonly                         \
-                    --hostonlyadapter1 $NETWORK             \
+                    --hostonlyadapter1 $NETWORK_INTERFACE   \
                     --cableconnected1 on
 else
     echo Oopps
     exit
 fi
-
-# NETWORK=$(VBoxManage hostonlyif create | grep vboxnet[[:digit:]] -E -o)
-# NETWORK_NB=$(echo $NETWORK | grep [[:digit:]] -E -o)
 
 
 # запустить машину с установочного диска

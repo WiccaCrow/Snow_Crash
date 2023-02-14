@@ -1,0 +1,1 @@
+подойдет ROT Cipher https://www.dcode.fr/rot-cipher

