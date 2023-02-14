@@ -16,23 +16,23 @@ flag14
 <a name="content"></a> 
 # Содержание и список полученных паролей от пользователя level(xx+1)
 
-| Пользователь level(xx) | Инструмент | Пароль от level(xx+1)                     |  
-| ---------------------- | ---------- | -----------------------------------------:|
-| [level00](#lvl00)      | Идентификатор шифра — [dCode](https://www.dcode.fr/) |  x24ti5gi3x0ol2eh4esiuxias                 |
-| [level01](#lvl01)      | программа John the Ripper | f2av5il02puano7naaf6adaaf                 |
-| [level02](#lvl02)      |  | kooda2puivaav1idi4f57q8iq                 |
-| [level03](#lvl03)      |  | qi0maab88jeaj46qoumi7maus                 |
-| [level04](#lvl04)      |  | ne2searoevaevoem4ov4ar8ap                 |
-| [level05](#lvl05)      |  | viuaaale9huek52boumoomioc                 |
-| [level06](#lvl06)      |  | wiok45aaoguiboiki2tuin6ub                 |
-| [level07](#lvl07)      |  | fiumuikeil55xe9cu4dood66h                 |
-| [level08](#lvl08)      |  | 25749xKZ8L7DkSCwJkT9dyv6f                 |
-| [level09](#lvl09)      |  | s5cAJpM8ev6XHw998pRWG728z                 |
-| [level10](#lvl10)      |  | feulo4b72j7edeahuete3no7c                 |
-| [level11](#lvl11)      |  | fa6v5ateaw21peobuub8ipe6s                 |
-| [level12](#lvl12)      |  | g1qKMiRpXf53AWhDaU7FEkczr                 |
-| [level13](#lvl13)      |  | 2A31L79asukciNyi8uppkEuSx                 |
-| [level14](#lvl14)      |  | 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ   |
+| Пользователь level(xx) | Уязвимость | Инструмент | Пароль от level(xx+1)  |  
+| ---------------------- | ---------- | ------------------------- | ----------------------:|
+| [level00](#lvl00)      | Хранение пароля в файле пользователя | идентификатор шифра — [dCode](https://www.dcode.fr/) |  x24ti5gi3x0ol2eh4esiuxias                 |
+| [level01](#lvl01)      | Хранение хеша пароля в /etc/passwd | программа John the Ripper | f2av5il02puano7naaf6adaaf                 |
+| [level02](#lvl02)      | Перехват TCP пакета с паролем | tcpdump - расшифровать TCP пакет | kooda2puivaav1idi4f57q8iq                 |
+| [level03](#lvl03)      | вызов system() | подмена echo на собственное| qi0maab88jeaj46qoumi7maus                 |
+| [level04](#lvl04)      | Perl: `` аналог system() | Верно подобранные параметры для передачи данных query string | ne2searoevaevoem4ov4ar8ap                 |
+| [level05](#lvl05)      | использование подстановки * для запуска содержимого директории, небезопасные права на запись в директорию | положить свой скрипт в слабое место | viuaaale9huek52boumoomioc                 |
+| [level06](#lvl06)      | уязвимость php: регулярное выражение обрабатывает прнимаемые программой аргументы | подбор аргументов для программы для регулярного выражения| wiok45aaoguiboiki2tuin6ub                 |
+| [level07](#lvl07)      | использование env | ltrace и export | fiumuikeil55xe9cu4dood66h                 |
+| [level08](#lvl08)      | проверка прав ссылки, без проверки прав файла по ссылке | ln -s создание символической ссылки | 25749xKZ8L7DkSCwJkT9dyv6f                 |
+| [level09](#lvl09)      | легко зашифрованный пароль | свой скрипт для расшифровки, либо что-то он-лайн можно подобрать | s5cAJpM8ev6XHw998pRWG728z                 |
+| [level10](#lvl10)      | использование access и open | ltrace для поиска уязвимости. Создание ссылок ln -sf для использования уязвимости | feulo4b72j7edeahuete3no7c                 |
+| [level11](#lvl11)      | язык lua: popen модуль для выполнения внешних программ (аналог system на C). Использование popen для проверки запрошенного пароля | telnet для передачи нужной команды на сервер вместо ввода пароля | fa6v5ateaw21peobuub8ipe6s                 |
+| [level12](#lvl12)      | Perl: \`` аналог system(). Использование регулярных выражений на сервере для обработки квери параметров внутри `` | передать правильное значение в квери параметрах для выполнения команды по взлому | g1qKMiRpXf53AWhDaU7FEkczr                 |
+| [level13](#lvl13)      | Взлом программы с gdb с помощью jump или eax перезаписью id пользователя | gdb | 2A31L79asukciNyi8uppkEuSx                 |
+| [level14](#lvl14)      | Взлом программы с gdb с помощью jump, обход ptrace | gdb |7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ   |
 
   
 #
