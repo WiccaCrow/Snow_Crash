@@ -4,10 +4,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo snap install john-the-ripper > /dev/null
     john ./lvl01ForJohn              2> /dev/null
     echo
-    john ./lvl01ForJohn --show       2> /dev/null    \
-        | grep flag01               \
-        | grep -Eo ':[^(:)]*:'      \
-        | head -1                   \
+    john ./lvl01ForJohn --show       2> /dev/null       \
+        | grep flag01                                   \
+        | grep -Eo ':[^(:)]*:'                          \
+        | head -1                                       \
         | grep -E -o '[^(':')](.*)[^(':')]'
     # ||
     # \/
@@ -22,12 +22,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     ./john                                          \
         ../../lvl01ForJohn                          \
-        # --format=descrypt-opencl                \
-        # --wordlist=/usr/share/john/password.lst \
-        # --show                                  \
+        # --format=descrypt-opencl                  \
+        # --wordlist=/usr/share/john/password.lst   \
+        # --show                                    \
     echo
-    cat ./john.pot  2> /dev/null    \
-        | grep -Eo ':.*'            \
+    cat ./john.pot  2> /dev/null                    \
+        | grep -Eo ':.*'                            \
         | grep -E -o '[^(':')](.*)'
     # ||
     # \/
