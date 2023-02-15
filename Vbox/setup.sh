@@ -95,19 +95,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     if VBoxManage list hostonlyifs | grep vboxnet0; then
         NETWORK_INTERFACE=vboxnet0
         NETWORK_NB=0
-        echo
-        echo here 1
-        echo
     else
-        echo
-        echo here 2
-        echo
         NETWORK_INTERFACE=$(VBoxManage hostonlyif create | grep 'vboxnet[[:digit:]]' -E -o)
         NETWORK_NB=$(echo $NETWORK_INTERFACE | grep '[[:digit:]]' -E -o)
     fi
-        echo
-        echo here 3
-        echo
     VBoxManage modifyvm        vb_mdulcie                   \
                     --nic1 hostonly                         \
                     --hostonlyadapter1 $NETWORK_INTERFACE   \

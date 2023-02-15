@@ -26,8 +26,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         # --wordlist=/usr/share/john/password.lst \
         # --show                                  \
     echo
-    cat ./john.pot
-
+    cat ./john.pot  2> /dev/null    \
+        | grep -Eo ':.*'            \
+        | grep -E -o '[^(':')](.*)'
+    # ||
+    # \/
+    # abcdefg
     echo
     cd  ../../
     rm -rf john-1.8.0.9-jumbo-macosx_avx2
