@@ -4,24 +4,32 @@ ISO_IMAGE_URL="https://cdn.intra.42.fr/isos/SnowCrash.iso"
 ISO_IMAGE_NAME="OS_guest.iso"
 
 HD_SIZE=10000
+MEMORY=512
+CPUS=1
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     WORK_FOLDER=$HOME
-    mkdir -p $WORK_FOLDER/vb_mdulcie
-    MEMORY=512
-    CPUS=1
     NETWORK_INTERFACE="enp3s0f2"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    WORK_FOLDER="/Users/mdulcie/goinfre"
-    MEMORY=4096
-    CPUS=6
+    if ls $HOME | grep goinfre ; then
+        echo present
+    else
+        mkdir $WORK_FOLDER/goinfre
+    fi
+    WORK_FOLDER=$HOME"/goinfre"
 else
     echo Oopps
     exit
 fi
 
+mkdir -p $WORK_FOLDER/vb_mdulcie
+
 # доступные ОС для установки на машине хосте.
 # VBoxManage list ostypes
+if ! VBoxManage list ostypes | grep Ubuntu_64; then
+    echo "It is impossible to install Ubuntu_64 on your VBox"
+    exit
+fi
 
 #  создать виртуальную машину и зарегистрировать в списке виртуальных машин
 echo -e "\033[32m Virtual machine: Create and register \033[0m"

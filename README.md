@@ -6,7 +6,12 @@ level05 level06 level07 level08 level09     \
 level10 level11 level12 level13 level14     \
 flag14
 
-Скрипт для запуска образа в VirtualBox: [Vbox/setup.sh](https://github.com/WiccaCrow/Snow_Crash/blob/master/Vbox/setup.sh) .
+Скрипт для запуска образа в VirtualBox: [Vbox/setup.sh](https://github.com/WiccaCrow/Snow_Crash/blob/master/Vbox/setup.sh) . \
+Минимальные требования для запуска:
+место на жестком диске=11 Гб
+RAM=512 Мб
+CPUS=1
+
 
 Полученные пароли записаны в файлы: [levelXX](https://github.com/WiccaCrow/Snow_Crash/tree/master/project)/flag, \
 где XX - номер уровня, на котором получен пароль.
