@@ -7,9 +7,9 @@ level10 level11 level12 level13 level14     \
 flag14
 
 Скрипт для запуска образа в VirtualBox: [Vbox/setup.sh](https://github.com/WiccaCrow/Snow_Crash/blob/master/Vbox/setup.sh) . \
-Минимальные требования для запуска:
-место на жестком диске=11 Гб
-RAM=512 Мб
+Минимальные требования для запуска: \
+место на жестком диске=11 Гб \
+RAM=512 Мб \
 CPUS=1
 
 
